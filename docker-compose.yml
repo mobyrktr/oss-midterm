@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+    dummy1:
+        container_name: dummy-sv-1
+        build: ./dummy-web-server1/
+
+    dummy2:
+        container_name: dummy-sv-2
+        build: ./dummy-web-server2/
+
+    nginx:
+        container_name: nginx-balancer
+        build: ./
+        ports:
+            - 7849:80
+        depends_on: 
+            - dummy1
+            - dummy2
